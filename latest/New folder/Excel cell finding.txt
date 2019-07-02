@@ -1,0 +1,60 @@
+
+
+
+
+
+FileInputStream fi=new FileInputStream(filepath+"InputData.xlsx");
+
+
+//Access workbook
+		XSSFWorkbook book=new XSSFWorkbook(fi);
+
+
+//Using book target sheet
+		XSSFSheet sht=book.getSheet("Sheet4");
+-----
+
+/Get number of rows data available in excel
+		int LR_count=sht.getLastRowNum();
+
+for (int i = 5; i <= LRow_num; i++) 
+		{
+
+---
+
+String Exe_status=sht.getRow(i).getCell(2).getStringCellValue();
+
+
+
+Double Numeric_mobile=sht.getRow(1).getCell(3).getNumericCellValue();
+		String MobileNum_Text=NumberToTextConverter.toText(Numeric_mobile);
+
+
+long value_long=Num_mobile.longValue();
+		System.out.println("Value in integer fromat is => "+value_long);
+
+
+
+
+//Iterate for number of dynamic cells in selected row
+		int LCell_num=sht.getRow(1).getLastCellNum();
+		for (int j = 0; j < LCell_num; j++)
+		{
+			String InputData=sht.getRow(1).getCell(j).getStringCellValue();
+			System.out.println("==> "+InputData);
+		}
+
+
+
+
+//Write date into existing row and New cell
+		sht.getRow(1).createCell(6).setCellValue("Testpass");
+
+		//Write Data into new row and new cell
+		sht.createRow(2).createCell(0).setCellValue("http://facebook.com");
+		
+		
+		//Create output workbook
+		book.write(new FileOutputStream(filepath+"OP.xlsx"));
+		book.close();  //Write and Save Data into Excel
+		
